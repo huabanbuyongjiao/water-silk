@@ -58,20 +58,25 @@ struct ContentView: View {
                             Text("已添加 \(store.draftPoints.count) 个点（至少需要 3 个）")
                                 .font(.caption)
                                 .foregroundStyle(store.draftPoints.count >= 3 ? .green : .orange)
+                            Text("按 Return 确认 · 按 Esc 取消")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
 
                             HStack {
-                                Button("确认多边形") {
+                                Button("确认 ↩") {
                                     store.commitDraft()
                                     store.isEditing = false
                                 }
                                 .disabled(store.draftPoints.count < 3)
                                 .buttonStyle(.borderedProminent)
+                                .keyboardShortcut(.return, modifiers: [])
 
-                                Button("取消") {
+                                Button("取消 ⎋") {
                                     store.cancelDraft()
                                     store.isEditing = false
                                 }
                                 .buttonStyle(.bordered)
+                                .keyboardShortcut(.escape, modifiers: [])
                             }
                         } else {
                             Button {
